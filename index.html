@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Marriage Hall | A Venue for Forever</title>
+<meta name="description" content="Discover The Marriage Hall, an elegant wedding and celebration venue. Explore our spaces, amenities, gallery and enquire about your special day.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ivory: #f8f5ef;
+  --cream: #eee6d9;
+  --gold: #b39461;
+  --dark-gold: #80663d;
+  --ink: #29251f;
+  --muted: #777067;
+  --wine: #572d35;
+  --white: #fffdf9;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+body.loading { overflow: hidden; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+img { display: block; width: 100%; object-fit: cover; }
+::selection { background: var(--gold); color: white; }
+
+h1, h2, h3, .serif {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+}
+h2 { font-size: clamp(2.7rem, 5vw, 4.6rem); line-height: 1.02; }
+p { line-height: 1.9; color: var(--muted); }
+.container { width: min(1180px, 88%); margin: auto; }
+.eyebrow {
+  color: var(--dark-gold);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 19px;
+}
+.section { padding: 110px 0; }
+.section-heading { max-width: 680px; margin-bottom: 52px; }
+.section-heading p { margin-top: 20px; max-width: 570px; }
+.center { text-align: center; margin-left: auto; margin-right: auto; }
+.italic { font-style: italic; color: var(--dark-gold); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 49px;
+  padding: 0 24px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  transition: .3s ease;
+  cursor: pointer;
+  border: 1px solid var(--gold);
+}
+.btn-gold { background: var(--gold); color: white; }
+.btn-gold:hover { background: var(--dark-gold); transform: translateY(-3px); }
+.btn-outline { color: var(--ink); background: transparent; }
+.btn-outline:hover { background: var(--ink); color: white; border-color: var(--ink); }
+
+/* CINEMATIC OPENING */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #242019;
+  color: var(--ivory);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+.intro::before, .intro::after {
+  content: "";
+  position: absolute;
+  width: min(85vw, 680px);
+  height: min(85vw, 680px);
+  border: 1px solid rgba(197,166,111,.22);
+  border-radius: 50%;
+  animation: orbit 18s linear infinite;
+}
+.intro::after {
+  width: min(72vw, 550px);
+  height: min(72vw, 550px);
+  animation-direction: reverse;
+}
+.intro-content { position: relative; z-index: 1; padding: 25px; }
+.intro-symbol {
+  color: var(--gold);
+  font-size: 30px;
+  margin-bottom: 22px;
+  animation: appear 1.3s both;
+}
+.intro-kicker {
+  font-size: 9px;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  color: #d0b98e;
+  animation: appear 1.5s .2s both;
+}
+.intro h1 {
+  font-size: clamp(3.3rem, 9vw, 7.6rem);
+  letter-spacing: 3px;
+  line-height: .88;
+  margin: 27px 0;
+  animation: appear 1.5s .4s both;
+}
+.intro h1 span { display: block; font-size: .53em; letter-spacing: 12px; margin-top: 19px; }
+.intro-line { width: 70px; height: 1px; background: var(--gold); margin: 30px auto; }
+.intro-subtitle {
+  color: #d9d1c4;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  font-style: italic;
+  animation: appear 1.5s .6s both;
+}
+.intro-enter {
+  background: transparent;
+  color: #e8d8b8;
+  border: 1px solid rgba(197,166,111,.6);
+  padding: 16px 26px;
+  margin-top: 37px;
+  letter-spacing: 3px;
+  font-size: 9px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: .3s;
+  animation: appear 1.5s .8s both;
+}
+.intro-enter:hover { background: var(--gold); color: white; }
+.intro.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+@keyframes orbit { to { transform: rotate(360deg); } }
+@keyframes appear {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* NAVIGATION */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(248,245,239,.95);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(179,148,97,.2);
+}
+.nav {
+  width: min(1300px, 92%);
+  margin: auto;
+  min-height: 83px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark { color: var(--gold); font-size: 32px; }
+.brand-name { font-family: 'Cormorant Garamond',serif; font-size: 24px; line-height: 1; }
+.brand-caption { font-size: 8px; letter-spacing: 3px; margin-top: 6px; color: var(--muted); }
+.nav-links { display: flex; align-items: center; gap: 26px; }
+.nav-links a {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+  transition: color .3s;
+}
+.nav-links a:hover { color: var(--dark-gold); }
+.nav-links .nav-cta { padding: 14px 18px; background: var(--ink); color: white; }
+.menu-toggle {
+  display: none; background: transparent; border: 0;
+  font-size: 27px; color: var(--ink); cursor: pointer;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 690px;
+  height: min(790px, 83vh);
+  display: flex;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+  background: #4b3d31;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(27,23,20,.78), rgba(27,23,20,.35) 55%, rgba(27,23,20,.12)),
+    linear-gradient(0deg, rgba(27,23,20,.3), transparent 40%),
+    url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2200&q=85') center 52%/cover;
+  animation: heroZoom 15s ease-in-out infinite alternate;
+}
+@keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+.hero-content { position: relative; z-index: 1; max-width: 780px; padding: 80px 0; }
+.hero .eyebrow { color: #e6c994; }
+.hero h2 { font-size: clamp(3.8rem, 8vw, 7rem); line-height: .9; }
+.hero h2 span { display: block; }
+.hero p { color: #e5dfd5; max-width: 470px; margin: 28px 0 32px; font-size: 13px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 13px; }
+.hero .btn-outline { color: white; border-color: rgba(255,255,255,.6); }
+.hero .btn-outline:hover { background: white; color: var(--ink); }
+.hero-bottom {
+  position: absolute; bottom: 32px; right: 6%;
+  font-size: 9px; text-transform: uppercase; letter-spacing: 3px; color: #eee2d0;
+}
+
+/* INTRODUCTION */
+.intro-section { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; }
+.intro-photo { position: relative; padding: 0 25px 25px 0; }
+.intro-photo img { height: 510px; }
+.intro-photo::after {
+  content: ""; position: absolute; inset: 25px 0 0 25px;
+  border: 1px solid var(--gold); z-index: -1;
+}
+.intro-copy p { margin: 22px 0; }
+.signature { font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: 24px; color: var(--dark-gold); margin-top: 28px; }
+
+/* QUICK FACTS */
+.facts { background: #eae1d4; padding: 35px 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+.fact { text-align: center; padding: 12px 15px; border-right: 1px solid #d2c3ae; }
+.fact:last-child { border: 0; }
+.fact strong { display: block; font-family: 'Cormorant Garamond',serif; font-size: 26px; font-weight: 500; }
+.fact span { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+
+/* VENUE */
+.venue-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 25px; }
+.venue-card { background: var(--white); }
+.venue-image { overflow: hidden; height: 290px; }
+.venue-image img { height: 100%; transition: transform .7s; }
+.venue-card:hover img { transform: scale(1.07); }
+.venue-info { padding: 26px 25px 30px; }
+.venue-info h3 { font-size: 30px; margin-bottom: 10px; }
+.venue-info p { font-size: 12px; }
+.card-link { display: inline-block; margin-top: 20px; font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--dark-gold); border-bottom: 1px solid var(--gold); padding-bottom: 6px; }
+
+/* GALLERY */
+.gallery-section { background: #29251f; color: var(--ivory); }
+.gallery-section .eyebrow { color: #d5b77e; }
+.gallery-section .section-heading p { color: #bdb5a8; }
+.gallery-grid { display: grid; grid-template-columns: 1.2fr .8fr 1fr; grid-template-rows: 240px 240px; gap: 14px; }
+.gallery-item { overflow: hidden; position: relative; }
+.gallery-item:first-child { grid-row: span 2; }
+.gallery-item:nth-child(4) { grid-column: span 2; }
+.gallery-item img { height: 100%; transition: transform .7s, opacity .5s; }
+.gallery-item:hover img { transform: scale(1.06); opacity: .8; }
+.gallery-label {
+  position: absolute; bottom: 17px; left: 17px;
+  color: white; font-family: 'Cormorant Garamond',serif; font-size: 23px;
+  text-shadow: 0 2px 12px #000;
+}
+
+/* EXPERIENCE */
+.experience-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 40px 30px; }
+.experience-item { border-top: 1px solid #d7c6aa; padding-top: 23px; }
+.experience-icon { font-size: 25px; color: var(--dark-gold); margin-bottom: 15px; }
+.experience-item h3 { font-size: 27px; margin-bottom: 8px; }
+.experience-item p { font-size: 12px; }
+
+/* QUOTE */
+.quote-section {
+  padding: 100px 0;
+  text-align: center;
+  background: linear-gradient(rgba(39,31,25,.74),rgba(39,31,25,.74)),
+  url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1800&q=80') center/cover;
+  color: white;
+}
+.quote-section blockquote {
+  max-width: 850px; margin: auto;
+  font-family: 'Cormorant Garamond',serif;
+  font-size: clamp(32px,5vw,55px); line-height: 1.2;
+}
+.quote-section p { color: #e4d5be; margin-top: 22px; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; }
+
+/* ENQUIRY */
+.enquiry { background: #eae1d4; }
+.enquiry-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 75px; align-items: start; }
+.contact-list { margin-top: 35px; display: grid; gap: 22px; }
+.contact-row { display: flex; gap: 16px; align-items: flex-start; }
+.contact-icon { font-size: 20px; color: var(--dark-gold); min-width: 25px; }
+.contact-row strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+.contact-row span, .contact-row a { font-size: 12px; color: var(--muted); }
+.enquiry-form { background: var(--white); padding: 38px; }
+.enquiry-form h3 { font-size: 34px; margin-bottom: 8px; }
+.enquiry-form > p { font-size: 12px; margin-bottom: 25px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field.full { grid-column: 1/-1; }
+.field label { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; }
+.field input, .field select, .field textarea {
+  width: 100%; padding: 14px; border: 1px solid #ddd3c4;
+  background: #fffdfa; color: var(--ink); outline: none; font: inherit; font-size: 12px;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--gold); }
+.field textarea { resize: vertical; min-height: 95px; }
+.form-submit { margin-top: 22px; width: 100%; }
+
+/* MAP */
+.map-wrap { height: 380px; background: #e0d7c9; }
+.map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; filter: saturate(.7); }
+
+/* FOOTER */
+footer { background: #242019; color: var(--ivory); padding: 65px 0 25px; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 35px; padding-bottom: 45px; }
+.footer-brand { font-family: 'Cormorant Garamond',serif; font-size: 34px; }
+.footer-top p { color: #bdb4a7; font-size: 12px; max-width: 360px; margin-top: 12px; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 22px; }
+.footer-links a { font-size: 10px; color: #ded4c6; text-transform: uppercase; letter-spacing: 1px; }
+.footer-bottom { border-top: 1px solid #51483b; padding-top: 23px; display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+.footer-bottom p { font-size: 10px; color: #bdb4a7; }
+.socials { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
+.socials a { border: 1px solid #6e6250; padding: 12px 16px; font-size: 10px; transition: .3s; }
+.socials a:hover { background: var(--gold); border-color: var(--gold); }
+
+/* WHATSAPP FLOAT */
+.whatsapp-float {
+  position: fixed; bottom: 23px; right: 23px; z-index: 900;
+  width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center; background: #218c59;
+  color: white; box-shadow: 0 5px 25px #0002; font-size: 25px;
+  transition: transform .3s;
+}
+.whatsapp-float:hover { transform: scale(1.09); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s, transform .8s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media(max-width: 900px) {
+  .nav-links { gap: 15px; }
+  .nav-links a { font-size: 9px; }
+  .nav-links .nav-cta { padding: 12px; }
+  .intro-section { gap: 45px; }
+  .venue-image { height: 230px; }
+  .enquiry-grid { gap: 35px; }
+}
+@media(max-width: 700px) {
+  .container { width: 89%; }
+  .section { padding: 78px 0; }
+  .nav { min-height: 72px; }
+  .brand-name { font-size: 21px; }
+  .brand-caption { letter-spacing: 2px; font-size: 7px; }
+  .menu-toggle { display: block; }
+  .nav-links {
+    display: none; position: absolute; top: 72px; left: 0; right: 0;
+    background: var(--ivory); padding: 22px 6%;
+    flex-direction: column; align-items: stretch; gap: 0;
+    border-bottom: 1px solid #ddd0bd;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 15px 0; border-bottom: 1px solid #e9e0d4; font-size: 11px; }
+  .nav-links .nav-cta { text-align: center; margin-top: 12px; padding: 15px; }
+  .hero { min-height: 670px; height: 80svh; }
+  .hero-bg {
+    background:
+      linear-gradient(90deg,rgba(27,23,20,.7),rgba(27,23,20,.2)),
+      linear-gradient(0deg,rgba(27,23,20,.4),transparent),
+      url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1000&q=85') center/cover;
+  }
+  .hero h2 { font-size: clamp(3.4rem, 14vw, 5.4rem); }
+  .hero p { font-size: 12px; }
+  .hero-bottom { font-size: 8px; bottom: 18px; }
+  .intro-section { grid-template-columns: 1fr; gap: 40px; }
+  .intro-photo img { height: 390px; }
+  .intro-copy { order: -1; }
+  .facts-grid { grid-template-columns: 1fr 1fr; }
+  .fact { padding: 20px 8px; }
+  .fact:nth-child(2) { border-right: 0; }
+  .fact:nth-child(-n+2) { border-bottom: 1px solid #d2c3ae; }
+  .venue-grid { grid-template-columns: 1fr; gap: 25px; }
+  .venue-image { height: 280px; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 250px 190px 190px; }
+  .gallery-item:first-child { grid-row: auto; }
+  .gallery-item:nth-child(4) { grid-column: span 2; }
+  .experience-grid { grid-template-columns: 1fr 1fr; gap: 30px 20px; }
+  .experience-item h3 { font-size: 23px; }
+  .enquiry-grid { grid-template-columns: 1fr; gap: 35px; }
+  .enquiry-form { padding: 25px 20px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .field.full { grid-column: auto; }
+  .map-wrap { height: 300px; }
+  .footer-top { flex-direction: column; }
+  .footer-links { gap: 17px; }
+  .intro h1 { font-size: clamp(3rem, 13vw, 5rem); }
+  .intro h1 span { letter-spacing: 7px; }
+}
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+
+<body class="loading">
+
+<!-- OPENING PRESENTATION -->
+<div class="intro" id="opening">
+  <div class="intro-content">
+    <div class="intro-symbol">✧</div>
+    <div class="intro-kicker">A place where forever begins</div>
+    <h1>THE MARRIAGE <span>H A L L</span></h1>
+    <div class="intro-line"></div>
+    <p class="intro-subtitle">Your story. Your celebration. Your forever.</p>
+    <button class="intro-enter" id="enterSite">ENTER THE EXPERIENCE &nbsp; ↗</button>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<header>
+  <nav class="nav">
+    <a class="brand" href="#home" aria-label="The Marriage Hall home">
+      <span class="brand-mark">✧</span>
+      <span>
+        <span class="brand-name">The Marriage Hall</span>
+        <span class="brand-caption">CELEBRATIONS & FOREVER</span>
+      </span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">Our Story</a>
+      <a href="#venues">The Venue</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#amenities">Amenities</a>
+      <a href="#contact" class="nav-cta">Plan Your Event ↗</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <span class="eyebrow">A timeless setting for your special day</span>
+        <h2>Where Love<br><span>Becomes</span><span class="italic">Forever.</span></h2>
+        <p>
+          Some moments deserve more than a place. They deserve a setting
+          as beautiful as the memories you create. Welcome to your next
+          unforgettable celebration.
+        </p>
+        <div class="hero-actions">
+          <a href="#venues" class="btn btn-gold">Discover Our Venue ↗</a>
+          <a href="#contact" class="btn btn-outline">Enquire Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-bottom">Made for moments that last a lifetime</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container intro-section">
+      <div class="intro-photo reveal">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85" alt="Elegant wedding ceremony and romantic floral decor" loading="lazy">
+      </div>
+      <div class="intro-copy reveal">
+        <span class="eyebrow">A little about us</span>
+        <h2>More than a venue.<br><span class="italic">A lifetime of memories.</span></h2>
+        <p>
+          Every love story is unique. We believe its celebration should be,
+          too. The Marriage Hall is imagined as an elegant destination for
+          weddings, receptions, family gatherings and life's most meaningful
+          milestones.
+        </p>
+        <p>
+          From the first welcome to the final farewell, discover a space
+          where thoughtful details, beautiful surroundings and joyful
+          moments come together.
+        </p>
+        <a href="#contact" class="btn btn-gold">Let's Plan Together ↗</a>
+        <div class="signature">Your beautiful beginning starts here.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACTS: REPLACE DEMO FIGURES -->
+  <section class="facts">
+    <div class="container facts-grid">
+      <div class="fact"><strong>Elegant</strong><span>Celebration Spaces</span></div>
+      <div class="fact"><strong>Every Detail</strong><span>Thoughtfully Planned</span></div>
+      <div class="fact"><strong>Your Day</strong><span>Your Way</span></div>
+      <div class="fact"><strong>Forever</strong><span>In Every Memory</span></div>
+    </div>
+  </section>
+
+  <!-- VENUE OPTIONS -->
+  <section class="section" id="venues">
+    <div class="container">
+      <div class="section-heading center reveal">
+        <span class="eyebrow">Find your perfect setting</span>
+        <h2>Spaces made for <span class="italic">celebration.</span></h2>
+        <p>
+          Whether you dream of a grand wedding or an intimate gathering,
+          explore the possibilities for your special occasion.
+        </p>
+      </div>
+
+      <div class="venue-grid">
+        <article class="venue-card reveal">
+          <div class="venue-image">
+            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=85" alt="Grand wedding banquet hall with beautiful lighting" loading="lazy">
+          </div>
+          <div class="venue-info">
+            <h3>The Grand Hall</h3>
+            <p>A sophisticated setting for wedding ceremonies, grand receptions and memorable celebrations.</p>
+            <a href="#contact" class="card-link">Enquire about this space ↗</a>
+          </div>
+        </article>
+
+        <article class="venue-card reveal">
+          <div class="venue-image">
+            <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=900&q=85" alt="Romantic wedding table setting with floral decorations" loading="lazy">
+          </div>
+          <div class="venue-info">
+            <h3>The Celebration Space</h3>
+            <p>A welcoming atmosphere for engagement parties, anniversaries and family occasions.</p>
+            <a href="#contact" class="card-link">Enquire about this space ↗</a>
+          </div>
+        </article>
+
+        <article class="venue-card reveal">
+          <div class="venue-image">
+            <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=900&q=85" alt="Beautifully styled wedding ceremony space" loading="lazy">
+          </div>
+          <div class="venue-info">
+            <h3>The Wedding Setting</h3>
+            <p>A beautiful backdrop for the rituals, photographs and moments you'll cherish forever.</p>
+            <a href="#contact" class="card-link">Enquire about this space ↗</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section class="section gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-heading reveal">
+        <span class="eyebrow">A glimpse of the magic</span>
+        <h2>Every frame tells <span class="italic">a story.</span></h2>
+        <p>
+          Picture the flowers, the lights, the laughter and the moment
+          everything comes together. Your celebration begins with a vision.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=85" alt="Romantic wedding ceremony" loading="lazy">
+          <span class="gallery-label">The Ceremony</span>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=700&q=85" alt="Elegant wedding details" loading="lazy">
+          <span class="gallery-label">The Details</span>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=700&q=85" alt="Wedding venue styling" loading="lazy">
+          <span class="gallery-label">The Decor</span>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1100&q=85" alt="Beautiful wedding reception table setting" loading="lazy">
+          <span class="gallery-label">The Celebration</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMENITIES -->
+  <section class="section" id="amenities">
+    <div class="container">
+      <div class="section-heading center reveal">
+        <span class="eyebrow">Thoughtful details matter</span>
+        <h2>Everything for your <span class="italic">special day.</span></h2>
+        <p>
+          A demo selection of features to showcase. Confirm actual facilities
+          and services with the venue before publishing.
+        </p>
+      </div>
+
+      <div class="experience-grid">
+        <article class="experience-item reveal">
+          <div class="experience-icon">✧</div>
+          <h3>Beautiful Decor</h3>
+          <p>Set the scene with a celebration space that reflects your style and personality.</p>
+        </article>
+        <article class="experience-item reveal">
+          <div class="experience-icon">◇</div>
+          <h3>Flexible Layouts</h3>
+          <p>Explore seating and event arrangements suited to your planned celebration.</p>
+        </article>
+        <article class="experience-item reveal">
+          <div class="experience-icon">♡</div>
+          <h3>Wedding Celebrations</h3>
+          <p>A welcoming setting for ceremonies, receptions and special family occasions.</p>
+        </article>
+        <article class="experience-item reveal">
+          <div class="experience-icon">❋</div>
+          <h3>Dining Arrangements</h3>
+          <p>Ask our team about catering options, dining setups and guest arrangements.</p>
+        </article>
+        <article class="experience-item reveal">
+          <div class="experience-icon">⌖</div>
+          <h3>Convenient Location</h3>
+          <p>Find our venue, plan your route and share directions with your guests.</p>
+        </article>
+        <article class="experience-item reveal">
+          <div class="experience-icon">✦</div>
+          <h3>Personal Enquiries</h3>
+          <p>Discuss your date, guest count, event requirements and booking details with us.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMOTIONAL BANNER -->
+  <section class="quote-section">
+    <div class="container reveal">
+      <span class="eyebrow" style="color:#e6c994">For the moments that matter</span>
+      <blockquote>
+        “A beautiful day fades into a beautiful memory. The feeling stays forever.”
+      </blockquote>
+      <p>THE MARRIAGE HALL · YOUR STORY STARTS HERE</p>
+    </div>
+  </section>
+
+  <!-- CONTACT AND BOOKING ENQUIRY -->
+  <section class="section enquiry" id="contact">
+    <div class="container enquiry-grid">
+      <div class="reveal">
+        <span class="eyebrow">Let's make it memorable</span>
+        <h2>Your date.<br>Your dreams.<br><span class="italic">Our conversation.</span></h2>
+        <p style="margin-top:22px">
+          Tell us about your celebration. Get in touch to enquire about
+          available dates, venue arrangements and your event requirements.
+        </p>
+
+        <div class="contact-list">
+          <div class="contact-row">
+            <span class="contact-icon">⌖</span>
+            <div>
+              <strong>Visit Our Venue</strong>
+              <span>Demo Address, Kolkata, West Bengal, India</span>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="contact-icon">☎</span>
+            <div>
+              <strong>Call Us</strong>
+              <a href="tel:+919876543210">+91 98765 43210 (DEMO)</a>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="contact-icon">◷</span>
+            <div>
+              <strong>Venue Visits</strong>
+              <span>By appointment — confirm availability</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="socials">
+          <a href="https://wa.me/919876543210" target="_blank" rel="noopener">WhatsApp ↗</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram ↗</a>
+          <a href="tel:+919876543210">Call Now ↗</a>
+        </div>
+      </div>
+
+      <form class="enquiry-form reveal" id="enquiryForm">
+        <h3>Begin your enquiry.</h3>
+        <p>Share a few details and continue directly to WhatsApp.</p>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="fullName">Your Name *</label>
+            <input id="fullName" name="name" type="text" placeholder="Full name" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number *</label>
+            <input id="phone" name="phone" type="tel" placeholder="+91..." required>
+          </div>
+          <div class="field">
+            <label for="eventType">Occasion *</label>
+            <select id="eventType" name="event" required>
+              <option value="">Select occasion</option>
+              <option>Wedding</option>
+              <option>Reception</option>
+              <option>Engagement</option>
+              <option>Anniversary</option>
+              <option>Family Celebration</option>
+              <option>Other Event</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="eventDate">Preferred Date</label>
+            <input id="eventDate" name="date" type="date">
+          </div>
+          <div class="field">
+            <label for="guests">Expected Guests</label>
+            <select id="guests" name="guests">
+              <option value="">Choose guest count</option>
+              <option>Under 100</option>
+              <option>100–300</option>
+              <option>300–500</option>
+              <option>500–800</option>
+              <option>800+</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="budget">Approximate Budget</label>
+            <select id="budget" name="budget">
+              <option value="">Select budget</option>
+              <option>Prefer to discuss</option>
+              <option>Under ₹1 lakh</option>
+              <option>₹1–3 lakh</option>
+              <option>₹3–5 lakh</option>
+              <option>₹5 lakh+</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="message">Tell Us More</label>
+            <textarea id="message" name="message" placeholder="Your ideas, requirements or questions..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-gold form-submit">Send Enquiry on WhatsApp ↗</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- GOOGLE MAP -->
+  <section id="location">
+    <div class="map-wrap">
+      <!-- DEMO MAP: replace the query with the real venue address -->
+      <iframe
+        title="Demo map showing Kolkata"
+        src="https://maps.google.com/maps?q=Kolkata%2C%20West%20Bengal%2C%20India&t=&z=12&ie=UTF8&iwloc=&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div style="background:#eee6d9;padding:24px 6%;display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;text-align:center">
+      <p style="font-size:12px">Planning your visit? Find us on Google Maps.</p>
+      <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=Kolkata%2C%20West%20Bengal%2C%20India" target="_blank" rel="noopener">Get Directions ↗</a>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">The Marriage Hall ✧</div>
+        <p>A beautiful setting for life's most meaningful celebrations. Your story deserves an unforgettable beginning.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about">Our Story</a>
+        <a href="#venues">Venue</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> The Marriage Hall. All rights reserved.</p>
+      <p>Made for moments that last forever.</p>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/919876543210" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">☏</a>
+
+<script>
+// CINEMATIC INTRO
+const opening = document.getElementById('opening');
+const enterSite = document.getElementById('enterSite');
+
+function closeIntro() {
+  opening.classList.add('hide');
+  document.body.classList.remove('loading');
+  sessionStorage.setItem('marriageHallIntroSeen', 'yes');
+}
+
+if (sessionStorage.getItem('marriageHallIntroSeen') === 'yes') {
+  opening.classList.add('hide');
+  document.body.classList.remove('loading');
+}
+
+enterSite.addEventListener('click', closeIntro);
+
+// MOBILE MENU
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  menuToggle.setAttribute('aria-expanded', String(isOpen));
+  menuToggle.textContent = isOpen ? '×' : '☰';
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.textContent = '☰';
+  });
+});
+
+// SCROLL REVEAL ANIMATIONS
+const revealItems = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealItems.forEach(item => observer.observe(item));
+} else {
+  revealItems.forEach(item => item.classList.add('visible'));
+}
+
+// AUTOMATIC COPYRIGHT YEAR
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// ENQUIRY FORM -> WHATSAPP
+// Replace this demo number with the venue's real WhatsApp number.
+// Use country code and digits only, without +, spaces or dashes.
+const WHATSAPP_NUMBER = '919876543210';
+
+document.getElementById('enquiryForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const name = document.getElementById('fullName').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const eventType = document.getElementById('eventType').value;
+  const date = document.getElementById('eventDate').value || 'Not specified';
+  const guests = document.getElementById('guests').value || 'Not specified';
+  const budget = document.getElementById('budget').value || 'Not specified';
+  const message = document.getElementById('message').value.trim() || 'No additional message';
+
+  const text = [
+    'NEW EVENT ENQUIRY — THE MARRIAGE HALL',
+    '',
+    'Name: ' + name,
+    'Phone: ' + phone,
+    'Occasion: ' + eventType,
+    'Preferred Date: ' + date,
+    'Expected Guests: ' + guests,
+    'Approximate Budget: ' + budget,
+    'Requirements: ' + message
+  ].join('\n');
+
+  const whatsappURL = 'https://wa.me/' + WHATSAPP_NUMBER +
+    '?text=' + encodeURIComponent(text);
+
+  window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+});
+</script>
+</body>
+</html>
